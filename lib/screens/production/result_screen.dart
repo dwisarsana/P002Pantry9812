@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/garden_style.dart';
+import '../../models/pantry_style.dart';
 import '../../services/storage_service.dart';
 import '../../theme/app_theme.dart';
 import '../main/main_screen.dart';
@@ -15,7 +15,7 @@ import '../account/history_screen.dart';
 class ResultScreen extends StatefulWidget {
   final String originalPath;
   final String resultPath;
-  final GardenStyle style;
+  final PantryStyle style;
   final Map<String, dynamic> settings;
 
   const ResultScreen({
@@ -44,7 +44,7 @@ class _ResultScreenState extends State<ResultScreen> {
         loadingBuilder: (_, child, progress) {
           if (progress == null) return child;
           return Container(
-            color: Colors.black,
+            color: AppTheme.deepSoil,
             child: Center(
               child: CircularProgressIndicator(
                 value: progress.expectedTotalBytes != null
@@ -67,10 +67,10 @@ class _ResultScreenState extends State<ResultScreen> {
     return const _ImageError();
   }
 
-  void _saveGarden() async {
+  void _savePantry() async {
     HapticFeedback.mediumImpact();
     final storage = context.read<StorageService>();
-    final current = await storage.loadGardens();
+    final current = await storage.loadPantries();
 
     // Avoid duplicate saves (already saved by GeneratingScreen)
     final alreadySaved = current.any((g) =>
@@ -78,7 +78,7 @@ class _ResultScreenState extends State<ResultScreen> {
         g.originalImagePath == widget.originalPath);
 
     if (!alreadySaved) {
-      await storage.saveGardens(current); // already saved by generating screen
+      await storage.savePantries(current); // already saved by generating screen
     }
 
     if (mounted) {
@@ -90,9 +90,9 @@ class _ResultScreenState extends State<ResultScreen> {
           backgroundColor: AppTheme.mossGreen,
           content: const Row(
             children: [
-              Icon(Icons.check_circle_rounded, color: Colors.white, size: 20),
+              Icon(Icons.check_circle_rounded, color: AppTheme.mistWhite, size: 20),
               SizedBox(width: 10),
-              Text('Saved to your garden collection!',
+              Text('Saved to your pantry collection!',
                   style: TextStyle(fontWeight: FontWeight.w500)),
             ],
           ),
@@ -111,7 +111,7 @@ class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppTheme.deepSoil,
       body: Stack(
         children: [
           // ── Before/After Comparison Slider ────────────────────────────
@@ -151,18 +151,18 @@ class _ResultScreenState extends State<ResultScreen> {
                             Container(
                               width: 2,
                               height: double.infinity,
-                              color: Colors.white,
+                              color: AppTheme.mistWhite,
                             ),
                             // Handle
                             Container(
                               height: 48,
                               width: 48,
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: AppTheme.mistWhite,
                                 shape: BoxShape.circle,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.3),
+                                    color: AppTheme.deepSoil.withValues(alpha: 0.3),
                                     blurRadius: 12,
                                   ),
                                 ],
@@ -191,7 +191,7 @@ class _ResultScreenState extends State<ResultScreen> {
             Positioned(
               top: 80,
               left: 16,
-              child: _Label(text: 'BEFORE', color: Colors.white70),
+              child: _Label(text: 'BEFORE', color: AppTheme.mistWhite),
             ),
           if (_showSlider)
             Positioned(
@@ -213,7 +213,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.7),
+                    AppTheme.deepSoil.withValues(alpha: 0.7),
                     Colors.transparent,
                   ],
                 ),
@@ -232,11 +232,11 @@ class _ResultScreenState extends State<ResultScreen> {
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.4),
+                      color: AppTheme.deepSoil.withValues(alpha: 0.4),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: const Icon(Icons.home_rounded,
-                        color: Colors.white, size: 22),
+                        color: AppTheme.mistWhite, size: 22),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -245,20 +245,20 @@ class _ResultScreenState extends State<ResultScreen> {
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.4),
+                      color: AppTheme.deepSoil.withValues(alpha: 0.4),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: const Icon(Icons.history_rounded,
-                        color: Colors.white, size: 22),
+                        color: AppTheme.mistWhite, size: 22),
                   ),
                 ),
                 const SizedBox(width: 16),
                 Image.asset('assets/icon.png', width: 32, height: 32),
                 const SizedBox(width: 8),
                 const Text(
-                  'Garden AI',
+                  'Pantry AI',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AppTheme.mistWhite,
                     fontWeight: FontWeight.w800,
                     fontSize: 18,
                     letterSpacing: 0.5,
@@ -272,16 +272,16 @@ class _ResultScreenState extends State<ResultScreen> {
                     // Perspective: We need the ID to update storage.
                     // For now, we'll try to find it by path.
                     final storage = context.read<StorageService>();
-                    final gardens = await storage.loadGardens();
-                    final index = gardens.indexWhere((g) => g.resultImagePath == widget.resultPath);
+                    final pantries = await storage.loadPantries();
+                    final index = pantries.indexWhere((g) => g.resultImagePath == widget.resultPath);
                     if (index != -1) {
-                      await storage.toggleFavorite(gardens[index].id);
+                      await storage.toggleFavorite(pantries[index].id);
                     }
                   },
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.4),
+                      color: AppTheme.deepSoil.withValues(alpha: 0.4),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: AnimatedSwitcher(
@@ -292,7 +292,7 @@ class _ResultScreenState extends State<ResultScreen> {
                             : Icons.favorite_border_rounded,
                         key: ValueKey(_isFavorite),
                         color:
-                            _isFavorite ? Colors.redAccent : Colors.white,
+                            _isFavorite ? Colors.redAccent : AppTheme.mistWhite,
                         size: 22,
                       ),
                     ),
@@ -314,8 +314,8 @@ class _ResultScreenState extends State<ResultScreen> {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    Colors.black.withValues(alpha: 0.8),
-                    Colors.black.withValues(alpha: 0.95),
+                    AppTheme.deepSoil.withValues(alpha: 0.8),
+                    AppTheme.deepSoil.withValues(alpha: 0.95),
                   ],
                   stops: const [0, 0.3, 1],
                 ),
@@ -332,21 +332,21 @@ class _ResultScreenState extends State<ResultScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 14, vertical: 7),
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.1),
+                          color: AppTheme.mistWhite.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.15)),
+                              color: AppTheme.mistWhite.withValues(alpha: 0.15)),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const Icon(Icons.compare_rounded,
-                                color: Colors.white60, size: 16),
+                                color: AppTheme.mistWhite, size: 16),
                             const SizedBox(width: 6),
                             Text(
                               'Drag slider to compare',
                               style: TextStyle(
-                                color: Colors.white.withValues(alpha: 0.7),
+                                color: AppTheme.mistWhite.withValues(alpha: 0.7),
                                 fontSize: 12,
                               ),
                             ),
@@ -391,7 +391,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   Text(
                     widget.style.name,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: AppTheme.mistWhite,
                       fontSize: 28,
                       fontWeight: FontWeight.w800,
                       letterSpacing: -0.5,
@@ -405,7 +405,7 @@ class _ResultScreenState extends State<ResultScreen> {
                         ? widget.style.moodDescription
                         : widget.style.description,
                     style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.6),
+                      color: AppTheme.mistWhite.withValues(alpha: 0.6),
                       fontSize: 13,
                       height: 1.4,
                     ),
@@ -423,13 +423,13 @@ class _ResultScreenState extends State<ResultScreen> {
                         child: SizedBox(
                           height: 56,
                           child: ElevatedButton(
-                            onPressed: _isSaved ? null : _saveGarden,
+                            onPressed: _isSaved ? null : _savePantry,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: _isSaved
-                                  ? Colors.white.withValues(alpha: 0.1)
+                                  ? AppTheme.mistWhite.withValues(alpha: 0.1)
                                   : AppTheme.mossGreen,
                               disabledBackgroundColor:
-                                  Colors.white.withValues(alpha: 0.1),
+                                  AppTheme.mistWhite.withValues(alpha: 0.1),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18),
                               ),
@@ -444,14 +444,14 @@ class _ResultScreenState extends State<ResultScreen> {
                                   _isSaved
                                       ? Icons.check_circle_rounded
                                       : Icons.save_alt_rounded,
-                                  color: Colors.white,
+                                  color: AppTheme.mistWhite,
                                   size: 20,
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
                                   _isSaved ? 'Saved!' : 'Save to Gallery',
                                   style: const TextStyle(
-                                    color: Colors.white,
+                                    color: AppTheme.mistWhite,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -503,7 +503,7 @@ class _Label extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.5),
+        color: AppTheme.deepSoil.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
@@ -533,18 +533,18 @@ class _ActionBtn extends StatelessWidget {
         width: 56,
         height: 56,
         decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.1),
+          color: AppTheme.mistWhite.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
+          border: Border.all(color: AppTheme.mistWhite.withValues(alpha: 0.15)),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: Colors.white, size: 22),
+            Icon(icon, color: AppTheme.mistWhite, size: 22),
             const SizedBox(height: 2),
             Text(
               label,
-              style: const TextStyle(color: Colors.white60, fontSize: 9),
+              style: const TextStyle(color: AppTheme.mistWhite, fontSize: 9),
             ),
           ],
         ),
@@ -564,10 +564,10 @@ class _ImageError extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.broken_image_rounded, color: Colors.white30, size: 48),
+            Icon(Icons.broken_image_rounded, color: AppTheme.mistWhite, size: 48),
             SizedBox(height: 8),
             Text('Image unavailable',
-                style: TextStyle(color: Colors.white30, fontSize: 12)),
+                style: TextStyle(color: AppTheme.mistWhite, fontSize: 12)),
           ],
         ),
       ),

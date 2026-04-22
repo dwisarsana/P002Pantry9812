@@ -4,7 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import '../../theme/app_theme.dart';
 import '../../services/storage_service.dart';
-import '../../models/garden_model.dart';
+import '../../models/pantry_model.dart';
 import '../../mock/mock_data.dart';
 import '../../widgets/glass_container.dart';
 
@@ -16,12 +16,12 @@ class AnalyticsScreen extends StatefulWidget {
 }
 
 class _AnalyticsScreenState extends State<AnalyticsScreen> {
-  late Future<List<GardenModel>> _gardensFuture;
+  late Future<List<PantryModel>> _pantriesFuture;
 
   @override
   void initState() {
     super.initState();
-    _gardensFuture = context.read<StorageService>().loadGardens();
+    _pantriesFuture = context.read<StorageService>().loadPantries();
   }
 
   @override
@@ -29,26 +29,26 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     return Scaffold(
       backgroundColor: AppTheme.warmSand,
       appBar: AppBar(
-        title: const Text("Garden Profile"),
+        title: const Text("Pantry Profile"),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: FutureBuilder<List<GardenModel>>(
-        future: _gardensFuture,
+      body: FutureBuilder<List<PantryModel>>(
+        future: _pantriesFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final gardens = snapshot.data ?? [];
-          final allGardens = [...gardens, ...MockData.initialHistory];
+          final pantries = snapshot.data ?? [];
+          final allPantries = [...pantries, ...MockData.initialHistory];
           
           // Analytics Logic
-          int total = allGardens.length;
+          int total = allPantries.length;
           
           // Style Distribution
           final styleCounts = <String, int>{};
-          for (var g in allGardens) {
+          for (var g in allPantries) {
             styleCounts[g.styleName] = (styleCounts[g.styleName] ?? 0) + 1;
           }
           
@@ -56,7 +56,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 
           // Season Distribution (mock settings check)
           final seasonCounts = <String, int>{};
-          for (var g in allGardens) {
+          for (var g in allPantries) {
             final season = g.settings['season'] as String? ?? 'Unknown';
             seasonCounts[season] = (seasonCounts[season] ?? 0) + 1;
           }
@@ -69,7 +69,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 Row(
                   children: [
                     Expanded(
-                      child: _StatCard(label: "Total Created", value: "$total", icon: Icons.landscape),
+                      child: _StatCard(label: "Total Created", value: "$total", icon: Icons.kitchen),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
@@ -105,7 +105,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                           value: e.value.toDouble(),
                           title: "${((e.value / total) * 100).toInt()}%",
                           radius: 50,
-                          titleStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+                          titleStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppTheme.mistWhite),
                         );
                       }).toList(),
                     ),
@@ -128,7 +128,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                       Colors.grey
                     ][index % 6];
                     return Chip(
-                      label: Text(key, style: const TextStyle(color: Colors.white, fontSize: 10)),
+                      label: Text(key, style: const TextStyle(color: AppTheme.mistWhite, fontSize: 10)),
                       backgroundColor: color,
                     );
                   }).toList(),
@@ -197,7 +197,7 @@ class _StatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GlassContainer(
-      color: Colors.white,
+      color: AppTheme.mistWhite,
       opacity: 0.5,
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -205,7 +205,7 @@ class _StatCard extends StatelessWidget {
           Icon(icon, size: 30, color: AppTheme.mossGreen),
           const SizedBox(height: 10),
           Text(value, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          Text(label, style: const TextStyle(fontSize: 12, color: Colors.black54)),
+          Text(label, style: const TextStyle(fontSize: 12, color: AppTheme.deepSoil)),
         ],
       ),
     );

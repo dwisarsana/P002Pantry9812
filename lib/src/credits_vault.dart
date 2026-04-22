@@ -1,6 +1,6 @@
 // lib/src/credits_vault.dart
 //
-// CreditsVault — simple consumable token store for Garden AI.
+// CreditsVault — simple consumable token store for Pantry AI.
 // Atomic ops & persistence with SharedPreferences.
 
 import 'dart:async';
@@ -11,7 +11,7 @@ class CreditsVault {
   CreditsVault._();
 
   /// Storage keys (bump suffix for schema migration)
-  static const String _kBalanceKey = 'garden_ai_tokens_balance_v1';
+  static const String _kBalanceKey = 'pantry_ai_tokens_balance_v1';
 
   /// Single-flight op chain to serialize mutations.
   static Future<void> _opChain = Future.value();

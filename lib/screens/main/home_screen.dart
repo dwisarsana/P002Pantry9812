@@ -6,7 +6,7 @@ import '../../theme/app_theme.dart';
 import '../../widgets/parallax_button.dart';
 import '../../widgets/glass_container.dart';
 import '../../mock/mock_data.dart';
-import '../../models/garden_model.dart';
+import '../../models/pantry_model.dart';
 import '../../services/storage_service.dart';
 import '../account/history_screen.dart';
 import '../account/settings_screen.dart';
@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                     "assets/images/The Nano Banana.jpeg",
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) => Image.asset(
-                      "assets/images/banana_hero.png",
+                      "assets/images/pantry_hero.png",
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) => Image.network(
                       "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=2000&auto=format&fit=crop",
@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Colors.black.withValues(alpha: 0.2),
+                          AppTheme.deepSoil.withValues(alpha: 0.2),
                           AppTheme.mossGreen.withValues(alpha: 0.8),
                         ],
                       ),
@@ -78,11 +78,11 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               title: const Text(
-                'Garden AI',
+                'Pantry AI',
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 22,
-                  color: Colors.white,
+                  color: AppTheme.mistWhite,
                   letterSpacing: 1.0,
                 ),
               ),
@@ -110,7 +110,7 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: GlassContainer(
                   padding: const EdgeInsets.all(24),
-                  color: Colors.white,
+                  color: AppTheme.mistWhite,
                   opacity: 0.8,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,7 +129,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "Landscape Artist",
+                                "Pantry Organizer",
                                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                   color: AppTheme.mossGreen,
                                   fontWeight: FontWeight.w800,
@@ -140,7 +140,7 @@ class HomeScreen extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(color: AppTheme.sunGlow, shape: BoxShape.circle),
-                            child: const Icon(Icons.wb_sunny_rounded, color: Colors.white, size: 20),
+                            child: const Icon(Icons.wb_sunny_rounded, color: AppTheme.mistWhite, size: 20),
                           ),
                         ],
                       ),
@@ -149,7 +149,7 @@ class HomeScreen extends StatelessWidget {
                         onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const UploadScreen())),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppTheme.mossGreen,
-                          foregroundColor: Colors.white,
+                          foregroundColor: AppTheme.mistWhite,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           minimumSize: const Size(double.infinity, 50),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -190,11 +190,11 @@ class HomeScreen extends StatelessWidget {
           ),
 
           SliverToBoxAdapter(
-            child: FutureBuilder<List<GardenModel>>(
-              future: context.read<StorageService>().loadGardens(),
+            child: FutureBuilder<List<PantryModel>>(
+              future: context.read<StorageService>().loadPantries(),
               builder: (context, snapshot) {
-                final gardens = snapshot.data ?? [];
-                if (gardens.isEmpty) return const SizedBox();
+                final pantries = snapshot.data ?? [];
+                if (pantries.isEmpty) return const SizedBox();
                 
                 return SizedBox(
                   height: 220,
@@ -202,11 +202,11 @@ class HomeScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     physics: const BouncingScrollPhysics(),
-                    itemCount: gardens.length > 5 ? 5 : gardens.length,
+                    itemCount: pantries.length > 5 ? 5 : pantries.length,
                     itemBuilder: (context, index) {
-                      final garden = gardens[index];
+                      final pantry = pantries[index];
                       return _GlassProjectCard(
-                        garden: garden,
+                        pantry: pantry,
                         imageBuilder: _buildHistoryImage,
                         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const HistoryScreen())),
                       ).animate().fadeIn(delay: (200 + index * 100).ms).slideX(begin: 0.2);
@@ -273,18 +273,18 @@ class _HeaderIconAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(icon, color: Colors.white, size: 24),
+      icon: Icon(icon, color: AppTheme.mistWhite, size: 24),
       onPressed: onTap,
     );
   }
 }
 
 class _GlassProjectCard extends StatelessWidget {
-  final GardenModel garden;
+  final PantryModel pantry;
   final Widget Function(String) imageBuilder;
   final VoidCallback onTap;
 
-  const _GlassProjectCard({required this.garden, required this.imageBuilder, required this.onTap});
+  const _GlassProjectCard({required this.pantry, required this.imageBuilder, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -298,13 +298,13 @@ class _GlassProjectCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              imageBuilder(garden.resultImagePath),
+              imageBuilder(pantry.resultImagePath),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.transparent, Colors.black.withValues(alpha: 0.7)],
+                    colors: [Colors.transparent, AppTheme.deepSoil.withValues(alpha: 0.7)],
                   ),
                 ),
               ),
@@ -316,14 +316,14 @@ class _GlassProjectCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      garden.styleName,
-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
+                      pantry.styleName,
+                      style: const TextStyle(color: AppTheme.mistWhite, fontWeight: FontWeight.bold, fontSize: 13),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      "${garden.timestamp.day}/${garden.timestamp.month}",
-                      style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 10),
+                      "${pantry.timestamp.day}/${pantry.timestamp.month}",
+                      style: TextStyle(color: AppTheme.mistWhite.withValues(alpha: 0.6), fontSize: 10),
                     ),
                   ],
                 ),
@@ -365,7 +365,7 @@ class _FuturisticStyleCard extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Colors.transparent, Colors.black.withValues(alpha: 0.8)],
+              colors: [Colors.transparent, AppTheme.deepSoil.withValues(alpha: 0.8)],
             ),
           ),
           padding: const EdgeInsets.all(16),
@@ -374,7 +374,7 @@ class _FuturisticStyleCard extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 14, letterSpacing: 0.5),
+                style: const TextStyle(color: AppTheme.mistWhite, fontWeight: FontWeight.w900, fontSize: 14, letterSpacing: 0.5),
                 textAlign: TextAlign.center,
               ),
             ],

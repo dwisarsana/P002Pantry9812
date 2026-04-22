@@ -119,7 +119,7 @@ class _SceneDetectionScreenState extends State<SceneDetectionScreen>
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppTheme.deepSoil,
       body: Stack(
         children: [
           // Background Image
@@ -133,10 +133,10 @@ class _SceneDetectionScreenState extends State<SceneDetectionScreen>
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.3),
-                    Colors.black.withValues(alpha: 0.2),
-                    Colors.black.withValues(alpha: 0.7),
-                    Colors.black.withValues(alpha: 0.9),
+                    AppTheme.deepSoil.withValues(alpha: 0.3),
+                    AppTheme.deepSoil.withValues(alpha: 0.2),
+                    AppTheme.deepSoil.withValues(alpha: 0.7),
+                    AppTheme.deepSoil.withValues(alpha: 0.9),
                   ],
                   stops: const [0, 0.3, 0.7, 1.0],
                 ),
@@ -235,7 +235,7 @@ class _SceneDetectionScreenState extends State<SceneDetectionScreen>
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    Colors.black.withValues(alpha: 0.95),
+                    AppTheme.deepSoil.withValues(alpha: 0.95),
                   ],
                 ),
               ),
@@ -253,7 +253,7 @@ class _SceneDetectionScreenState extends State<SceneDetectionScreen>
                             strokeWidth: 2,
                             valueColor: const AlwaysStoppedAnimation(
                                 AppTheme.mossGreen),
-                            backgroundColor: Colors.white.withValues(alpha: 0.1),
+                            backgroundColor: AppTheme.mistWhite.withValues(alpha: 0.1),
                           ),
                         )
                       else
@@ -265,7 +265,7 @@ class _SceneDetectionScreenState extends State<SceneDetectionScreen>
                             ? 'Analysis Complete!'
                             : 'Analyzing Your Space...',
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: AppTheme.mistWhite,
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 0.3,
@@ -294,7 +294,7 @@ class _SceneDetectionScreenState extends State<SceneDetectionScreen>
                                   ? AppTheme.mossGreen.withValues(alpha: 0.2)
                                   : isCurrent
                                       ? AppTheme.sunGlow.withValues(alpha: 0.2)
-                                      : Colors.white.withValues(alpha: 0.05),
+                                      : AppTheme.mistWhite.withValues(alpha: 0.05),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Icon(
@@ -305,7 +305,7 @@ class _SceneDetectionScreenState extends State<SceneDetectionScreen>
                                   ? AppTheme.mossGreen
                                   : isCurrent
                                       ? AppTheme.sunGlow
-                                      : Colors.white30,
+                                      : AppTheme.mistWhite,
                               size: 14,
                             ),
                           ),
@@ -315,10 +315,10 @@ class _SceneDetectionScreenState extends State<SceneDetectionScreen>
                               step['label'] as String,
                               style: TextStyle(
                                 color: isDone
-                                    ? Colors.white70
+                                    ? AppTheme.mistWhite
                                     : isCurrent
-                                        ? Colors.white
-                                        : Colors.white24,
+                                        ? AppTheme.mistWhite
+                                        : AppTheme.mistWhite,
                                 fontSize: 13,
                                 fontWeight: isCurrent
                                     ? FontWeight.w600
@@ -351,7 +351,7 @@ class _SceneDetectionScreenState extends State<SceneDetectionScreen>
                       height: 4,
                       child: LinearProgressIndicator(
                         value: _currentStep / _analysisSteps.length,
-                        backgroundColor: Colors.white.withValues(alpha: 0.1),
+                        backgroundColor: AppTheme.mistWhite.withValues(alpha: 0.1),
                         valueColor: AlwaysStoppedAnimation(
                           _scanComplete
                               ? AppTheme.mossGreen
@@ -377,7 +377,7 @@ class _SceneDetectionScreenState extends State<SceneDetectionScreen>
                   padding:
                       const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.5),
+                    color: AppTheme.deepSoil.withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
@@ -405,7 +405,7 @@ class _SceneDetectionScreenState extends State<SceneDetectionScreen>
                       Text(
                         _scanComplete ? 'DONE' : 'SCANNING',
                         style: const TextStyle(
-                          color: Colors.white70,
+                          color: AppTheme.mistWhite,
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 1.5,
@@ -418,13 +418,13 @@ class _SceneDetectionScreenState extends State<SceneDetectionScreen>
                   padding:
                       const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.5),
+                    color: AppTheme.deepSoil.withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
                     '${(_currentStep / _analysisSteps.length * 100).toInt()}%',
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: AppTheme.mistWhite,
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
                     ),
@@ -509,7 +509,7 @@ class _DetectionTag extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.7),
+        color: AppTheme.deepSoil.withValues(alpha: 0.7),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: AppTheme.mossGreen.withValues(alpha: 0.6),
@@ -530,7 +530,7 @@ class _DetectionTag extends StatelessWidget {
           Text(
             label,
             style: const TextStyle(
-              color: Colors.white,
+              color: AppTheme.mistWhite,
               fontSize: 11,
               fontWeight: FontWeight.w500,
             ),

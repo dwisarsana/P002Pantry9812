@@ -2,13 +2,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../theme/app_theme.dart';
-import '../../models/garden_style.dart';
+import '../../models/pantry_style.dart';
 import 'rendering_screen.dart';
 
 class BeforeAfterScreen extends StatefulWidget {
   final String originalPath;
   final String resultPath;
-  final GardenStyle style;
+  final PantryStyle style;
   final Map<String, dynamic> settings;
 
   const BeforeAfterScreen({
@@ -36,7 +36,7 @@ class _BeforeAfterScreenState extends State<BeforeAfterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppTheme.deepSoil,
       body: Stack(
         children: [
           // Original Image (Bottom Layer)
@@ -71,7 +71,7 @@ class _BeforeAfterScreenState extends State<BeforeAfterScreen> {
                   child: Container(
                     width: 4,
                     height: double.infinity,
-                    color: Colors.white,
+                    color: AppTheme.mistWhite,
                     child: Container(
                       decoration: BoxDecoration(
                         boxShadow: [
@@ -116,7 +116,7 @@ class _BeforeAfterScreenState extends State<BeforeAfterScreen> {
                 ),
                 child: const Text(
                   "Finalize & Save",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                  style: TextStyle(fontSize: 18, color: AppTheme.mistWhite),
                 ),
               ).animate().fadeIn(delay: 1.seconds).slideY(begin: 1, end: 0),
             ),
@@ -129,9 +129,9 @@ class _BeforeAfterScreenState extends State<BeforeAfterScreen> {
             child: Text(
               "ORIGINAL",
               style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.8),
+                color: AppTheme.mistWhite.withValues(alpha: 0.8),
                 fontWeight: FontWeight.bold,
-                shadows: const [Shadow(blurRadius: 5, color: Colors.black)],
+                shadows: const [Shadow(blurRadius: 5, color: AppTheme.deepSoil)],
               ),
             ),
           ),
@@ -143,7 +143,7 @@ class _BeforeAfterScreenState extends State<BeforeAfterScreen> {
               style: TextStyle(
                 color: AppTheme.sunGlow.withValues(alpha: 0.9),
                 fontWeight: FontWeight.bold,
-                shadows: const [Shadow(blurRadius: 5, color: Colors.black)],
+                shadows: const [Shadow(blurRadius: 5, color: AppTheme.deepSoil)],
               ),
             ),
           ),

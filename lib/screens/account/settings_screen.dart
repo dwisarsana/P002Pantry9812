@@ -57,11 +57,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     icon: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppTheme.mistWhite,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.05),
+                            color: AppTheme.deepSoil.withValues(alpha: 0.05),
                             blurRadius: 10,
                           ),
                         ],
@@ -81,11 +81,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     icon: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppTheme.mistWhite,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.05),
+                            color: AppTheme.deepSoil.withValues(alpha: 0.05),
                             blurRadius: 10,
                           ),
                         ],
@@ -121,7 +121,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   color: AppTheme.mossGreen,
                                   borderRadius: BorderRadius.circular(8),
                                   onPressed: () => manageOrUpgrade(context),
-                                  child: const Text("Upgrade", style: TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.bold)),
+                                  child: const Text("Upgrade", style: TextStyle(fontSize: 12, color: AppTheme.mistWhite, fontWeight: FontWeight.bold)),
                                 ),
                         ),
                         const Divider(height: 1),
@@ -218,7 +218,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 color: Colors.redAccent.withValues(alpha: 0.1),
                 child: ListTile(
                   leading: const Icon(Icons.delete_forever_rounded, color: Colors.redAccent),
-                  title: const Text("Reset All Garden Data", style: TextStyle(color: Colors.redAccent)),
+                  title: const Text("Reset All Pantry Data", style: TextStyle(color: Colors.redAccent)),
                   onTap: () async {
                     final storage = context.read<StorageService>();
                     final confirm = await showDialog<bool>(
@@ -226,7 +226,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       builder: (context) => AlertDialog(
                         backgroundColor: AppTheme.charcoal,
                         title: const Text("Reset Data?"),
-                        content: const Text("This will delete all your saved gardens and reset tokens. This action cannot be undone."),
+                        content: const Text("This will delete all your saved pantries and reset tokens. This action cannot be undone."),
                         actions: [
                           TextButton(onPressed: () => Navigator.pop(context, false), child: const Text("Cancel")),
                           TextButton(
@@ -251,7 +251,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 40),
               Center(
                 child: Text(
-                  "Garden AI v1.0.0",
+                  "Pantry AI v1.0.0",
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
               ),

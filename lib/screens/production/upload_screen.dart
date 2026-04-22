@@ -46,7 +46,7 @@ class _UploadScreenState extends State<UploadScreen>
     {
       'icon': Icons.hd_rounded,
       'title': 'High Resolution',
-      'desc': 'Clear photos produce more detailed garden designs',
+      'desc': 'Clear photos produce more detailed pantry designs',
       'color': const Color(0xFFB39DDB),
     },
   ];
@@ -161,14 +161,14 @@ class _UploadScreenState extends State<UploadScreen>
             height: 4,
             margin: const EdgeInsets.only(bottom: 24),
             decoration: BoxDecoration(
-              color: Colors.white24,
+              color: AppTheme.mistWhite,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
           Text(
-            'Add Your Garden Photo',
+            'Add Your Pantry Photo',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Colors.white,
+                  color: AppTheme.mistWhite,
                   fontWeight: FontWeight.w700,
                 ),
           ),
@@ -176,7 +176,7 @@ class _UploadScreenState extends State<UploadScreen>
           Text(
             'Choose how you\'d like to capture your space',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white60,
+                  color: AppTheme.mistWhite,
                 ),
           ),
           const SizedBox(height: 28),
@@ -229,7 +229,7 @@ class _UploadScreenState extends State<UploadScreen>
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
+                  color: AppTheme.deepSoil.withValues(alpha: 0.05),
                   blurRadius: 10,
                 ),
               ],
@@ -253,7 +253,7 @@ class _UploadScreenState extends State<UploadScreen>
             ),
             const SizedBox(width: 10),
             Text(
-              "Upload Garden",
+              "Upload Pantry",
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
@@ -270,7 +270,7 @@ class _UploadScreenState extends State<UploadScreen>
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
+                    color: AppTheme.deepSoil.withValues(alpha: 0.05),
                     blurRadius: 10,
                   ),
                 ],
@@ -355,7 +355,7 @@ class _UploadScreenState extends State<UploadScreen>
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
-                      "AI-powered garden design in seconds",
+                      "AI-powered pantry design in seconds",
                       style:
                           Theme.of(context).textTheme.bodyMedium?.copyWith(
                                 color: AppTheme.mossGreen,
@@ -375,7 +375,7 @@ class _UploadScreenState extends State<UploadScreen>
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: _selectedImage != null
-                              ? Colors.black
+                              ? AppTheme.deepSoil
                               : AppTheme.mistWhite.withValues(alpha: 0.7),
                           borderRadius: BorderRadius.circular(32),
                           border: Border.all(
@@ -388,7 +388,7 @@ class _UploadScreenState extends State<UploadScreen>
                             BoxShadow(
                               color: _isAnalyzing
                                   ? AppTheme.mossGreen.withValues(alpha: 0.15)
-                                  : Colors.black.withValues(alpha: 0.05),
+                                  : AppTheme.deepSoil.withValues(alpha: 0.05),
                               blurRadius: _isAnalyzing ? 30 : 20,
                               offset: const Offset(0, 8),
                             ),
@@ -412,7 +412,7 @@ class _UploadScreenState extends State<UploadScreen>
                               if (_isAnalyzing && _selectedImage != null)
                                 Positioned.fill(
                                   child: Container(
-                                    color: Colors.black.withValues(alpha: 0.5),
+                                    color: AppTheme.deepSoil.withValues(alpha: 0.5),
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -435,7 +435,7 @@ class _UploadScreenState extends State<UploadScreen>
                                         const Text(
                                           'Preparing image...',
                                           style: TextStyle(
-                                            color: Colors.white,
+                                            color: AppTheme.mistWhite,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -452,7 +452,7 @@ class _UploadScreenState extends State<UploadScreen>
                                 // Hero background image
                                 Positioned.fill(
                                   child: Image.asset(
-                                    'assets/images/AI Garden Transformation.jpeg',
+                                    'assets/images/AI Pantry Transformation.jpeg',
                                     fit: BoxFit.cover,
                                   ).animate().blur(begin: const Offset(4, 4), end: Offset.zero, duration: 1.seconds).scale(begin: const Offset(1.1, 1.1), end: const Offset(1.0, 1.0), duration: 1.seconds),
                                 ),
@@ -464,8 +464,8 @@ class _UploadScreenState extends State<UploadScreen>
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                         colors: [
-                                          Colors.black.withValues(alpha: 0.2),
-                                          Colors.black.withValues(alpha: 0.6),
+                                          AppTheme.deepSoil.withValues(alpha: 0.2),
+                                          AppTheme.deepSoil.withValues(alpha: 0.6),
                                         ],
                                       ),
                                     ),
@@ -505,7 +505,7 @@ class _UploadScreenState extends State<UploadScreen>
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                            color: Colors.white,
+                                            color: AppTheme.mistWhite,
                                             fontWeight: FontWeight.w700,
                                           ),
                                     ),
@@ -516,7 +516,7 @@ class _UploadScreenState extends State<UploadScreen>
                                           .textTheme
                                           .bodySmall
                                           ?.copyWith(
-                                            color: Colors.white70,
+                                            color: AppTheme.mistWhite,
                                           ),
                                     ),
                                   ],
@@ -678,12 +678,12 @@ class _SourceOption extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Icon(icon, color: Colors.white, size: 32),
+            Icon(icon, color: AppTheme.mistWhite, size: 32),
             const SizedBox(height: 12),
             Text(
               label,
               style: const TextStyle(
-                color: Colors.white,
+                color: AppTheme.mistWhite,
                 fontWeight: FontWeight.w700,
                 fontSize: 16,
               ),
@@ -692,7 +692,7 @@ class _SourceOption extends StatelessWidget {
             Text(
               subtitle,
               style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.75),
+                color: AppTheme.mistWhite.withValues(alpha: 0.75),
                 fontSize: 12,
               ),
             ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../theme/app_theme.dart';
-import '../../models/garden_style.dart';
+import '../../models/pantry_style.dart';
 import '../../mock/mock_data.dart';
 import '../../widgets/glass_container.dart';
 import 'generating_screen.dart';
@@ -11,7 +11,7 @@ import '../../src/constant.dart';
 
 class CustomStudioScreen extends StatefulWidget {
   final String imagePath;
-  final GardenStyle selectedStyle;
+  final PantryStyle selectedStyle;
 
   const CustomStudioScreen({
     super.key,
@@ -28,9 +28,9 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
   // Core Settings
   double _density = 0.5;
   double _flowers = 0.3;
-  double _water = 0.0;
-  double _sunlight = 0.7;
-  double _treeSize = 0.5;
+  double _containers = 0.0;
+  double _lighting = 0.7;
+  double _containerSize = 0.5;
   double _colorVibrancy = 0.6;
 
   // Selection States
@@ -38,7 +38,7 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
   String _timeOfDay = 'Golden Hour';
   int _selectedPathway = 0;
   int _selectedLighting = 0;
-  int _selectedWaterFeature = -1;
+  int _selectedContainerFeature = -1;
 
   late TabController _tabController;
   late PageController _previewController;
@@ -61,8 +61,8 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
 
   final List<String> _sectionTabs = [
     'Environment',
-    'Plants',
-    'Hardscape',
+    'Ingredients',
+    'Shelving',
     'Lighting',
     'Water',
   ];
@@ -87,21 +87,21 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
   Map<String, dynamic> get _allSettings => {
         'density': _density,
         'flowers': _flowers,
-        'water': _water,
-        'sunlight': _sunlight,
-        'treeSize': _treeSize,
+        'water': _containers,
+        'lighting': _lighting,
+        'containerSize': _containerSize,
         'colorVibrancy': _colorVibrancy,
         'season': _season,
         'timeOfDay': _timeOfDay,
         'pathway': _selectedPathway,
-        'lighting': _selectedLighting,
-        'waterFeature': _selectedWaterFeature,
+        'lightingType': _selectedLighting,
+        'waterFeature': _selectedContainerFeature,
       };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppTheme.deepSoil,
       body: Stack(
         children: [
           // Background Preview
@@ -115,10 +115,10 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.2),
-                    Colors.black.withValues(alpha: 0.1),
-                    Colors.black.withValues(alpha: 0.6),
-                    Colors.black.withValues(alpha: 0.95),
+                    AppTheme.deepSoil.withValues(alpha: 0.2),
+                    AppTheme.deepSoil.withValues(alpha: 0.1),
+                    AppTheme.deepSoil.withValues(alpha: 0.6),
+                    AppTheme.deepSoil.withValues(alpha: 0.95),
                   ],
                   stops: const [0, 0.25, 0.5, 0.75],
                 ),
@@ -141,14 +141,14 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                         child: Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.1),
+                            color: AppTheme.mistWhite.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(14),
                             border: Border.all(
-                                color: Colors.white.withValues(alpha: 0.1)),
+                                color: AppTheme.mistWhite.withValues(alpha: 0.1)),
                           ),
                           child: const Icon(
                               Icons.arrow_back_ios_new_rounded,
-                              color: Colors.white,
+                              color: AppTheme.mistWhite,
                               size: 18),
                         ),
                       ),
@@ -160,7 +160,7 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                             Text(
                               'Customize',
                               style: TextStyle(
-                                color: Colors.white.withValues(alpha: 0.6),
+                                color: AppTheme.mistWhite.withValues(alpha: 0.6),
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -168,7 +168,7 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                             Text(
                               widget.selectedStyle.name,
                               style: const TextStyle(
-                                color: Colors.white,
+                                color: AppTheme.mistWhite,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w800,
                                 letterSpacing: -0.3,
@@ -184,28 +184,28 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                           setState(() {
                             _density = 0.5;
                             _flowers = 0.3;
-                            _water = 0.0;
-                            _sunlight = 0.7;
-                            _treeSize = 0.5;
+                            _containers = 0.0;
+                            _lighting = 0.7;
+                            _containerSize = 0.5;
                             _colorVibrancy = 0.6;
                             _season = 'Spring';
                             _timeOfDay = 'Golden Hour';
                             _selectedPathway = 0;
                             _selectedLighting = 0;
-                            _selectedWaterFeature = -1;
+                            _selectedContainerFeature = -1;
                           });
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 14, vertical: 8),
                           decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.1),
+                            color: AppTheme.mistWhite.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: const Text(
                             'Reset',
                             style: TextStyle(
-                              color: Colors.white70,
+                              color: AppTheme.mistWhite,
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
                             ),
@@ -222,10 +222,10 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16, vertical: 10),
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.08),
+                    color: AppTheme.mistWhite.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(14),
                     border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.08)),
+                        color: AppTheme.mistWhite.withValues(alpha: 0.08)),
                   ),
                   child: Row(
                     children: [
@@ -235,9 +235,9 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          'Adjust every detail to create your perfect ${widget.selectedStyle.name.toLowerCase()} garden',
+                          'Adjust every detail to create your perfect ${widget.selectedStyle.name.toLowerCase()} pantry',
                           style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.6),
+                            color: AppTheme.mistWhite.withValues(alpha: 0.6),
                             fontSize: 12,
                             height: 1.3,
                           ),
@@ -260,7 +260,7 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                         const BorderRadius.vertical(top: Radius.circular(32)),
                     border: Border(
                       top: BorderSide(
-                          color: Colors.white.withValues(alpha: 0.08)),
+                          color: AppTheme.mistWhite.withValues(alpha: 0.08)),
                     ),
                   ),
                   child: Column(
@@ -271,7 +271,7 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                         height: 4,
                         margin: const EdgeInsets.only(top: 12, bottom: 10),
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.2),
+                          color: AppTheme.mistWhite.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(2),
                         ),
                       ),
@@ -285,8 +285,8 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                           indicatorColor: AppTheme.mossGreen,
                           indicatorWeight: 3,
                           indicatorPadding: const EdgeInsets.symmetric(horizontal: 8),
-                          labelColor: Colors.white,
-                          unselectedLabelColor: Colors.white38,
+                          labelColor: AppTheme.mistWhite,
+                          unselectedLabelColor: AppTheme.mistWhite,
                           labelStyle: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
@@ -308,10 +308,10 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                           controller: _tabController,
                           children: [
                             _buildEnvironmentTab(),
-                            _buildPlantsTab(),
-                            _buildHardscapeTab(),
+                            _buildIngredientsTab(),
+                            _buildShelvingTab(),
                             _buildLightingTab(),
-                            _buildWaterTab(),
+                            _buildContainerTab(),
                           ],
                         ),
                       ),
@@ -354,12 +354,12 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
                                 Icon(Icons.auto_awesome_rounded,
-                                    color: Colors.white, size: 20),
+                                    color: AppTheme.mistWhite, size: 20),
                                 SizedBox(width: 10),
                                 Text(
-                                  'Generate Garden Design',
+                                  'Generate Pantry Design',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: AppTheme.mistWhite,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -393,7 +393,7 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Season Selector
-          _SectionLabel(label: 'Season', icon: Icons.eco_rounded),
+          _SectionLabel(label: 'Season', icon: Icons.local_dining_rounded),
           const SizedBox(height: 12),
           SizedBox(
             height: 100,
@@ -416,12 +416,12 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                     decoration: BoxDecoration(
                       color: isSelected
                           ? (s['color'] as Color).withValues(alpha: 0.15)
-                          : Colors.white.withValues(alpha: 0.05),
+                          : AppTheme.mistWhite.withValues(alpha: 0.05),
                       borderRadius: BorderRadius.circular(18),
                       border: Border.all(
                         color: isSelected
                             ? (s['color'] as Color).withValues(alpha: 0.5)
-                            : Colors.white.withValues(alpha: 0.08),
+                            : AppTheme.mistWhite.withValues(alpha: 0.08),
                         width: isSelected ? 2 : 1,
                       ),
                     ),
@@ -446,8 +446,8 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                           s['name'] as String,
                           style: TextStyle(
                             color: isSelected
-                                ? Colors.white
-                                : Colors.white60,
+                                ? AppTheme.mistWhite
+                                : AppTheme.mistWhite,
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
                           ),
@@ -455,7 +455,7 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                         Text(
                           s['desc'] as String,
                           style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.4),
+                            color: AppTheme.mistWhite.withValues(alpha: 0.4),
                             fontSize: 9,
                           ),
                           maxLines: 1,
@@ -495,7 +495,7 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                     decoration: BoxDecoration(
                       color: isSelected
                           ? (t['color'] as Color).withValues(alpha: 0.2)
-                          : Colors.white.withValues(alpha: 0.05),
+                          : AppTheme.mistWhite.withValues(alpha: 0.05),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                         color: isSelected
@@ -513,8 +513,8 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                           t['name'] as String,
                           style: TextStyle(
                             color: isSelected
-                                ? Colors.white
-                                : Colors.white54,
+                                ? AppTheme.mistWhite
+                                : AppTheme.mistWhite,
                             fontSize: 12,
                             fontWeight: isSelected
                                 ? FontWeight.w600
@@ -533,11 +533,11 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
 
           // Sunlight slider
           _SliderRow(
-            label: 'Sunlight Intensity',
-            value: _sunlight,
+            label: 'Lighting Intensity',
+            value: _lighting,
             icon: Icons.wb_sunny_rounded,
             activeColor: AppTheme.sunGlow,
-            onChanged: (v) => setState(() => _sunlight = v),
+            onChanged: (v) => setState(() => _lighting = v),
           ),
 
           const SizedBox(height: 8),
@@ -554,15 +554,15 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
     );
   }
 
-  // ============ PLANTS TAB ============
-  Widget _buildPlantsTab() {
+  // ============ INGREDIENTS TAB ============
+  Widget _buildIngredientsTab() {
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _SliderRow(
-            label: 'Plant Density',
+            label: 'Ingredient Density',
             value: _density,
             icon: Icons.grass_rounded,
             activeColor: AppTheme.mossGreen,
@@ -582,33 +582,33 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
           ),
           const SizedBox(height: 8),
           _SliderRow(
-            label: 'Tree Scale',
-            value: _treeSize,
+            label: 'Container Scale',
+            value: _containerSize,
             icon: Icons.park_rounded,
             activeColor: const Color(0xFF66BB6A),
-            onChanged: (v) => setState(() => _treeSize = v),
+            onChanged: (v) => setState(() => _containerSize = v),
             leftLabel: 'Small',
             rightLabel: 'Grand',
           ),
 
           const SizedBox(height: 20),
 
-          _SectionLabel(label: 'Plant Categories', icon: Icons.category_rounded),
+          _SectionLabel(label: 'Ingredient Categories', icon: Icons.category_rounded),
           const SizedBox(height: 12),
 
-          // Plant categories grid
+          // Ingredient categories grid
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: MockData.plantCategories.map((cat) {
+            children: MockData.ingredientCategories.map((cat) {
               return Container(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 14, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.06),
+                  color: AppTheme.mistWhite.withValues(alpha: 0.06),
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.08),
+                    color: AppTheme.mistWhite.withValues(alpha: 0.08),
                   ),
                 ),
                 child: Row(
@@ -623,7 +623,7 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                         Text(
                           cat['name'] as String,
                           style: const TextStyle(
-                            color: Colors.white,
+                            color: AppTheme.mistWhite,
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
                           ),
@@ -631,7 +631,7 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                         Text(
                           '${cat['count']} varieties',
                           style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.4),
+                            color: AppTheme.mistWhite.withValues(alpha: 0.4),
                             fontSize: 10,
                           ),
                         ),
@@ -647,8 +647,8 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
     );
   }
 
-  // ============ HARDSCAPE TAB ============
-  Widget _buildHardscapeTab() {
+  // ============ SHELVING TAB ============
+  Widget _buildShelvingTab() {
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
       child: Column(
@@ -676,12 +676,12 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                     decoration: BoxDecoration(
                       color: isSelected
                           ? AppTheme.mossGreen.withValues(alpha: 0.15)
-                          : Colors.white.withValues(alpha: 0.05),
+                          : AppTheme.mistWhite.withValues(alpha: 0.05),
                       borderRadius: BorderRadius.circular(18),
                       border: Border.all(
                         color: isSelected
                             ? AppTheme.mossGreen.withValues(alpha: 0.5)
-                            : Colors.white.withValues(alpha: 0.08),
+                            : AppTheme.mistWhite.withValues(alpha: 0.08),
                         width: isSelected ? 2 : 1,
                       ),
                     ),
@@ -697,8 +697,8 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                           option['name'] as String,
                           style: TextStyle(
                             color: isSelected
-                                ? Colors.white
-                                : Colors.white54,
+                                ? AppTheme.mistWhite
+                                : AppTheme.mistWhite,
                             fontSize: 11,
                             fontWeight: isSelected
                                 ? FontWeight.w600
@@ -716,19 +716,19 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
 
           const SizedBox(height: 24),
 
-          // Additional hardscape options
-          _SectionLabel(label: 'Garden Structures', icon: Icons.fence_rounded),
+          // Additional shelving options
+          _SectionLabel(label: 'Pantry Structures', icon: Icons.fence_rounded),
           const SizedBox(height: 12),
           Wrap(
             spacing: 8,
             runSpacing: 8,
             children: [
-              _ToggleChip(label: '🏡 Pergola', isOn: true),
-              _ToggleChip(label: '🪑 Seating', isOn: false),
-              _ToggleChip(label: '🔥 Fire Pit', isOn: false),
-              _ToggleChip(label: '🏗️ Raised Beds', isOn: true),
-              _ToggleChip(label: '🧱 Retaining Wall', isOn: false),
-              _ToggleChip(label: '🚪 Garden Gate', isOn: false),
+              _ToggleChip(label: '🥫 Canned Goods', isOn: true),
+              _ToggleChip(label: '🍷 Wine Rack', isOn: false),
+              _ToggleChip(label: '🥐 Bread Box', isOn: false),
+              _ToggleChip(label: '🧺 Woven Baskets', isOn: true),
+              _ToggleChip(label: '🗄️ Pull-out Drawers', isOn: false),
+              _ToggleChip(label: '🏷️ Labeling System', isOn: false),
             ],
           ),
         ],
@@ -766,12 +766,12 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                     decoration: BoxDecoration(
                       color: isSelected
                           ? AppTheme.sunGlow.withValues(alpha: 0.15)
-                          : Colors.white.withValues(alpha: 0.05),
+                          : AppTheme.mistWhite.withValues(alpha: 0.05),
                       borderRadius: BorderRadius.circular(18),
                       border: Border.all(
                         color: isSelected
                             ? AppTheme.sunGlow.withValues(alpha: 0.5)
-                            : Colors.white.withValues(alpha: 0.08),
+                            : AppTheme.mistWhite.withValues(alpha: 0.08),
                         width: isSelected ? 2 : 1,
                       ),
                     ),
@@ -787,8 +787,8 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                           option['name'] as String,
                           style: TextStyle(
                             color: isSelected
-                                ? Colors.white
-                                : Colors.white54,
+                                ? AppTheme.mistWhite
+                                : AppTheme.mistWhite,
                             fontSize: 10,
                             fontWeight: isSelected
                                 ? FontWeight.w600
@@ -804,7 +804,7 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                           style: TextStyle(
                             color: isSelected
                                 ? AppTheme.sunGlow
-                                : Colors.white30,
+                                : AppTheme.mistWhite,
                             fontSize: 9,
                             fontWeight: FontWeight.w500,
                           ),
@@ -833,43 +833,43 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
     );
   }
 
-  // ============ WATER TAB ============
-  Widget _buildWaterTab() {
+  // ============ CONTAINER TAB ============
+  Widget _buildContainerTab() {
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _SliderRow(
-            label: 'Water Element Scale',
-            value: _water,
-            icon: Icons.water_drop_rounded,
+            label: 'Container Organization Scale',
+            value: _containers,
+            icon: Icons.kitchen_rounded,
             activeColor: AppTheme.skyBlue,
-            onChanged: (v) => setState(() => _water = v),
+            onChanged: (v) => setState(() => _containers = v),
             leftLabel: 'None',
             rightLabel: 'Grand',
           ),
 
           const SizedBox(height: 20),
 
-          _SectionLabel(label: 'Water Feature Type', icon: Icons.waves_rounded),
+          _SectionLabel(label: 'Container Type', icon: Icons.inventory_2_rounded),
           const SizedBox(height: 12),
           SizedBox(
             height: 100,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: MockData.waterFeatures.length,
+              itemCount: MockData.containerFeatures.length,
               itemBuilder: (context, index) {
-                final option = MockData.waterFeatures[index];
-                final isSelected = _selectedWaterFeature == index;
+                final option = MockData.containerFeatures[index];
+                final isSelected = _selectedContainerFeature == index;
                 return GestureDetector(
                   onTap: () {
                     HapticFeedback.selectionClick();
                     setState(() {
-                      _selectedWaterFeature =
+                      _selectedContainerFeature =
                           isSelected ? -1 : index;
-                      if (!isSelected && _water < 0.2) {
-                        _water = 0.4;
+                      if (!isSelected && _containers < 0.2) {
+                        _containers = 0.4;
                       }
                     });
                   },
@@ -880,12 +880,12 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                     decoration: BoxDecoration(
                       color: isSelected
                           ? AppTheme.skyBlue.withValues(alpha: 0.15)
-                          : Colors.white.withValues(alpha: 0.05),
+                          : AppTheme.mistWhite.withValues(alpha: 0.05),
                       borderRadius: BorderRadius.circular(18),
                       border: Border.all(
                         color: isSelected
                             ? AppTheme.skyBlue.withValues(alpha: 0.5)
-                            : Colors.white.withValues(alpha: 0.08),
+                            : AppTheme.mistWhite.withValues(alpha: 0.08),
                         width: isSelected ? 2 : 1,
                       ),
                     ),
@@ -901,8 +901,8 @@ class _CustomStudioScreenState extends State<CustomStudioScreen>
                           option['name'] as String,
                           style: TextStyle(
                             color: isSelected
-                                ? Colors.white
-                                : Colors.white54,
+                                ? AppTheme.mistWhite
+                                : AppTheme.mistWhite,
                             fontSize: 11,
                             fontWeight: isSelected
                                 ? FontWeight.w600
@@ -935,12 +935,12 @@ class _SectionLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(icon, color: Colors.white54, size: 16),
+        Icon(icon, color: AppTheme.mistWhite, size: 16),
         const SizedBox(width: 8),
         Text(
           label.toUpperCase(),
           style: const TextStyle(
-            color: Colors.white54,
+            color: AppTheme.mistWhite,
             fontSize: 11,
             fontWeight: FontWeight.w700,
             letterSpacing: 1.2,
@@ -982,7 +982,7 @@ class _SliderRow extends StatelessWidget {
             Text(
               label,
               style: const TextStyle(
-                color: Colors.white,
+                color: AppTheme.mistWhite,
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
               ),
@@ -1010,8 +1010,8 @@ class _SliderRow extends StatelessWidget {
         SliderTheme(
           data: SliderThemeData(
             activeTrackColor: activeColor,
-            inactiveTrackColor: Colors.white.withValues(alpha: 0.08),
-            thumbColor: Colors.white,
+            inactiveTrackColor: AppTheme.mistWhite.withValues(alpha: 0.08),
+            thumbColor: AppTheme.mistWhite,
             trackHeight: 4,
             thumbShape: const RoundSliderThumbShape(
               enabledThumbRadius: 8,
@@ -1033,14 +1033,14 @@ class _SliderRow extends StatelessWidget {
                 Text(
                   leftLabel,
                   style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.3),
+                    color: AppTheme.mistWhite.withValues(alpha: 0.3),
                     fontSize: 10,
                   ),
                 ),
                 Text(
                   rightLabel,
                   style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.3),
+                    color: AppTheme.mistWhite.withValues(alpha: 0.3),
                     fontSize: 10,
                   ),
                 ),
@@ -1084,18 +1084,18 @@ class _ToggleChipState extends State<_ToggleChip> {
         decoration: BoxDecoration(
           color: _on
               ? AppTheme.mossGreen.withValues(alpha: 0.15)
-              : Colors.white.withValues(alpha: 0.05),
+              : AppTheme.mistWhite.withValues(alpha: 0.05),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: _on
                 ? AppTheme.mossGreen.withValues(alpha: 0.4)
-                : Colors.white.withValues(alpha: 0.08),
+                : AppTheme.mistWhite.withValues(alpha: 0.08),
           ),
         ),
         child: Text(
           widget.label,
           style: TextStyle(
-            color: _on ? Colors.white : Colors.white54,
+            color: _on ? AppTheme.mistWhite : AppTheme.mistWhite,
             fontSize: 12,
             fontWeight: _on ? FontWeight.w600 : FontWeight.w400,
           ),
