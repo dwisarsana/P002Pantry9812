@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../theme/app_theme.dart';
-import '../../models/garden_style.dart';
+import '../../models/pantry_style.dart';
 import 'result_screen.dart';
 
 class RenderingScreen extends StatefulWidget {
   final String originalPath;
   final String resultPath;
-  final GardenStyle style;
+  final PantryStyle style;
   final Map<String, dynamic> settings;
 
   const RenderingScreen({
@@ -54,7 +54,7 @@ class _RenderingScreenState extends State<RenderingScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Growing Plant Animation
+            // Organizing Animation
             SizedBox(
               height: 150,
               width: 150,

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../theme/app_theme.dart';
 import '../../mock/mock_data.dart';
-import '../../models/garden_style.dart';
+import '../../models/pantry_style.dart';
 import 'custom_studio_screen.dart';
 
 class StyleLibraryScreen extends StatefulWidget {
@@ -28,10 +28,10 @@ class _StyleLibraryScreenState extends State<StyleLibraryScreen>
     {'name': 'Lush', 'icon': Icons.forest_rounded, 'emoji': '🌴'},
     {'name': 'Classic', 'icon': Icons.account_balance_rounded, 'emoji': '🏛️'},
     {'name': 'Modern', 'icon': Icons.architecture_rounded, 'emoji': '🏙️'},
-    {'name': 'Wild', 'icon': Icons.nature_rounded, 'emoji': '🌿'},
+    {'name': 'Spacious', 'icon': Icons.kitchen_rounded, 'emoji': '🌿'},
   ];
 
-  List<GardenStyle> get _filteredStyles {
+  List<PantryStyle> get _filteredStyles {
     final category = _categories[_selectedCategoryIndex]['name'] as String;
     var styles = category == 'All'
         ? MockData.styles
@@ -49,7 +49,7 @@ class _StyleLibraryScreenState extends State<StyleLibraryScreen>
     return styles;
   }
 
-  void _showStyleDetail(GardenStyle style) {
+  void _showStyleDetail(PantryStyle style) {
     HapticFeedback.lightImpact();
     showModalBottomSheet(
       context: context,
@@ -104,11 +104,11 @@ class _StyleLibraryScreenState extends State<StyleLibraryScreen>
               icon: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.3),
+                  color: AppTheme.deepSoil.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Icon(Icons.arrow_back_ios_new_rounded,
-                    color: Colors.white, size: 18),
+                    color: AppTheme.mistWhite, size: 18),
               ),
               onPressed: () => Navigator.pop(context),
             ),
@@ -118,11 +118,11 @@ class _StyleLibraryScreenState extends State<StyleLibraryScreen>
                 icon: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.3),
+                    color: AppTheme.deepSoil.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Icon(Icons.sort_rounded,
-                      color: Colors.white, size: 18),
+                      color: AppTheme.mistWhite, size: 18),
                 ),
                 onSelected: (value) => setState(() => _sortBy = value),
                 itemBuilder: (_) => [
@@ -136,14 +136,14 @@ class _StyleLibraryScreenState extends State<StyleLibraryScreen>
                 icon: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.3),
+                    color: AppTheme.deepSoil.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
                     _isGridView
                         ? Icons.view_list_rounded
                         : Icons.grid_view_rounded,
-                    color: Colors.white,
+                    color: AppTheme.mistWhite,
                     size: 18,
                   ),
                 ),
@@ -154,10 +154,10 @@ class _StyleLibraryScreenState extends State<StyleLibraryScreen>
                 icon: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.3),
+                    color: AppTheme.deepSoil.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Icon(Icons.home_rounded, color: Colors.white, size: 20),
+                  child: const Icon(Icons.home_rounded, color: AppTheme.mistWhite, size: 20),
                 ),
                 onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
               ),
@@ -178,8 +178,8 @@ class _StyleLibraryScreenState extends State<StyleLibraryScreen>
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Colors.black.withValues(alpha: 0.1),
-                          Colors.black.withValues(alpha: 0.8),
+                          AppTheme.deepSoil.withValues(alpha: 0.1),
+                          AppTheme.deepSoil.withValues(alpha: 0.8),
                         ],
                       ),
                     ),
@@ -194,7 +194,7 @@ class _StyleLibraryScreenState extends State<StyleLibraryScreen>
                   Text(
                     "Choose Your Vision",
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: AppTheme.mistWhite,
                       fontWeight: FontWeight.w800,
                       fontSize: 18,
                     ),
@@ -203,7 +203,7 @@ class _StyleLibraryScreenState extends State<StyleLibraryScreen>
                   Text(
                     "${_filteredStyles.length} styles available",
                     style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.7),
+                      color: AppTheme.mistWhite.withValues(alpha: 0.7),
                       fontSize: 10,
                       fontWeight: FontWeight.w400,
                     ),
@@ -268,7 +268,7 @@ class _StyleLibraryScreenState extends State<StyleLibraryScreen>
                             cat['name'] as String,
                             style: TextStyle(
                               color: isSelected
-                                  ? Colors.white
+                                  ? AppTheme.mistWhite
                                   : AppTheme.charcoal,
                               fontWeight: FontWeight.w600,
                               fontSize: 13,
@@ -364,7 +364,7 @@ class _StyleLibraryScreenState extends State<StyleLibraryScreen>
 }
 
 class _StyleGridCard extends StatelessWidget {
-  final GardenStyle style;
+  final PantryStyle style;
   final bool isFavorite;
   final VoidCallback onTap;
   final VoidCallback onFavorite;
@@ -389,7 +389,7 @@ class _StyleGridCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(22),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.08),
+                color: AppTheme.deepSoil.withValues(alpha: 0.08),
                 blurRadius: 15,
                 offset: const Offset(0, 6),
               ),
@@ -412,8 +412,8 @@ class _StyleGridCard extends StatelessWidget {
                       colors: [
                         Colors.transparent,
                         Colors.transparent,
-                        Colors.black.withValues(alpha: 0.3),
-                        Colors.black.withValues(alpha: 0.85),
+                        AppTheme.deepSoil.withValues(alpha: 0.3),
+                        AppTheme.deepSoil.withValues(alpha: 0.85),
                       ],
                       stops: const [0, 0.4, 0.65, 1.0],
                     ),
@@ -429,14 +429,14 @@ class _StyleGridCard extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.3),
+                        color: AppTheme.deepSoil.withValues(alpha: 0.3),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         isFavorite
                             ? Icons.favorite_rounded
                             : Icons.favorite_border_rounded,
-                        color: isFavorite ? Colors.redAccent : Colors.white70,
+                        color: isFavorite ? Colors.redAccent : AppTheme.mistWhite,
                         size: 18,
                       ),
                     ),
@@ -458,7 +458,7 @@ class _StyleGridCard extends StatelessWidget {
                     child: Text(
                       style.difficulty,
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: AppTheme.mistWhite,
                         fontSize: 9,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 0.5,
@@ -480,7 +480,7 @@ class _StyleGridCard extends StatelessWidget {
                         Text(
                           style.name,
                           style: const TextStyle(
-                            color: Colors.white,
+                            color: AppTheme.mistWhite,
                             fontWeight: FontWeight.w700,
                             fontSize: 15,
                             height: 1.2,
@@ -492,7 +492,7 @@ class _StyleGridCard extends StatelessWidget {
                               ? style.moodDescription
                               : style.description,
                           style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.75),
+                            color: AppTheme.mistWhite.withValues(alpha: 0.75),
                             fontSize: 11,
                             height: 1.3,
                           ),
@@ -508,13 +508,13 @@ class _StyleGridCard extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 7, vertical: 3),
                               decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.15),
+                                color: AppTheme.mistWhite.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
                                 tag,
                                 style: const TextStyle(
-                                  color: Colors.white70,
+                                  color: AppTheme.mistWhite,
                                   fontSize: 9,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -532,7 +532,7 @@ class _StyleGridCard extends StatelessWidget {
                             Text(
                               style.popularity.toStringAsFixed(1),
                               style: const TextStyle(
-                                color: Colors.white,
+                                color: AppTheme.mistWhite,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -569,7 +569,7 @@ class _StyleGridCard extends StatelessWidget {
 }
 
 class _StyleListCard extends StatelessWidget {
-  final GardenStyle style;
+  final PantryStyle style;
   final bool isFavorite;
   final VoidCallback onTap;
   final VoidCallback onFavorite;
@@ -595,7 +595,7 @@ class _StyleListCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.04),
+              color: AppTheme.deepSoil.withValues(alpha: 0.04),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
@@ -710,7 +710,7 @@ class _StyleListCard extends StatelessWidget {
 }
 
 class _StyleDetailSheet extends StatelessWidget {
-  final GardenStyle style;
+  final PantryStyle style;
   final bool isFavorite;
   final VoidCallback onFavorite;
   final VoidCallback onSelect;
@@ -777,7 +777,7 @@ class _StyleDetailSheet extends StatelessWidget {
                                     : Icons.favorite_border_rounded,
                                 color: isFavorite
                                     ? Colors.redAccent
-                                    : Colors.white,
+                                    : AppTheme.mistWhite,
                                 onTap: onFavorite,
                               ),
                               const SizedBox(width: 8),
@@ -980,12 +980,12 @@ class _StyleDetailSheet extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [
                               Icon(Icons.auto_awesome_rounded,
-                                  color: Colors.white, size: 20),
+                                  color: AppTheme.mistWhite, size: 20),
                               SizedBox(width: 10),
                               Text(
                                 'Apply This Style',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppTheme.mistWhite,
                                   fontSize: 17,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -1014,7 +1014,7 @@ class _CircleAction extends StatelessWidget {
 
   const _CircleAction({
     required this.icon,
-    this.color = Colors.white,
+    this.color = AppTheme.mistWhite,
     required this.onTap,
   });
 
@@ -1025,7 +1025,7 @@ class _CircleAction extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.black.withValues(alpha: 0.3),
+          color: AppTheme.deepSoil.withValues(alpha: 0.3),
           shape: BoxShape.circle,
         ),
         child: Icon(icon, color: color, size: 20),

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   // Primary Colors
-  static const Color mossGreen = Color(0xFF2D5A27);
-  static const Color leafGreen = Color(0xFF4CAF50);
-  static const Color mintGreen = Color(0xFF81C784);
-  static const Color deepSoil = Color(0xFF212121);
-  static const Color warmSand = Color(0xFFF5F0E8);
-  static const Color mistWhite = Color(0xFFFAFAFA);
-  static const Color sunGlow = Color(0xFFFFB74D);
-  static const Color skyBlue = Color(0xFF64B5F6);
-  static const Color roseGold = Color(0xFFE8B4B8);
-  static const Color lavender = Color(0xFFB39DDB);
-  static const Color coral = Color(0xFFFF8A65);
+  static const Color mossGreen = Color(0xFF8B5A2B); // warmBrown
+  static const Color leafGreen = Color(0xFFD2B48C); // tan
+  static const Color mintGreen = Color(0xFFF5DEB3); // wheat
+  static const Color deepSoil = Color(0xFF3E2723); // darkCoffee
+  static const Color warmSand = Color(0xFFFFF8DC); // cornsilk
+  static const Color mistWhite = Color(0xFFFDF5E6); // oldLace
+  static const Color sunGlow = Color(0xFFDAA520); // goldenrod
+  static const Color skyBlue = Color(0xFFA0522D); // sienna
+  static const Color roseGold = Color(0xFFDEB887); // burlywood
+  static const Color lavender = Color(0xFFCD853F); // peru
+  static const Color coral = Color(0xFFD2691E); // chocolate
   static const Color slate = Color(0xFF37474F);
   static const Color charcoal = Color(0xFF1A1A1A);
   static const Color cream = Color(0xFFFFF8E1);

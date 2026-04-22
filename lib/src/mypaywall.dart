@@ -1,5 +1,5 @@
 // lib/src/mypaywall.dart
-// Garden AI — Premium Paywall Screen
+// Pantry AI — Premium Paywall Screen
 
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
@@ -16,15 +16,15 @@ import 'constant.dart'
         kPrivacyPolicyUrl,
         kTermsOfUseUrl;
 
-class GardenAIPaywall extends StatefulWidget {
+class PantryAIPaywall extends StatefulWidget {
   final bool forceLoading;
-  const GardenAIPaywall({super.key, this.forceLoading = false});
+  const PantryAIPaywall({super.key, this.forceLoading = false});
 
   @override
-  State<GardenAIPaywall> createState() => _GardenAIPaywallState();
+  State<PantryAIPaywall> createState() => _PantryAIPaywallState();
 }
 
-class _GardenAIPaywallState extends State<GardenAIPaywall>
+class _PantryAIPaywallState extends State<PantryAIPaywall>
     with SingleTickerProviderStateMixin {
   Offerings? _offerings;
   StoreProduct? _token5;
@@ -123,7 +123,7 @@ class _GardenAIPaywallState extends State<GardenAIPaywall>
       if (isPro) {
         if (Navigator.canPop(context)) Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Welcome to Garden AI Premium!')),
+          const SnackBar(content: Text('Welcome to Pantry AI Premium!')),
         );
       }
     } catch (e) {
@@ -329,7 +329,7 @@ class _GardenAIPaywallState extends State<GardenAIPaywall>
           ),
           const SizedBox(height: 24),
           const Text(
-            'Garden AI Premium',
+            'Pantry AI Premium',
             style: TextStyle(
               color: Colors.white,
               fontSize: 26,
@@ -339,21 +339,21 @@ class _GardenAIPaywallState extends State<GardenAIPaywall>
           ),
           const SizedBox(height: 8),
           const Text(
-            'Transform your landscape with unlimited AI power and exclusive designs.',
+            'Transform your pantry with unlimited AI power and exclusive designs.',
             style: TextStyle(color: Colors.white60, fontSize: 15),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 40),
 
           _sectionTitle('Premium Features'),
-          _feature(CupertinoIcons.infinite, 'Unlimited Garden generations'),
+          _feature(CupertinoIcons.infinite, 'Unlimited Pantry generations'),
           _feature(
             CupertinoIcons.paintbrush,
-            'Access all 100+ Premium garden styles',
+            'Access all 100+ Premium pantry styles',
           ),
           _feature(CupertinoIcons.photo_fill, 'High-resolution 4K exports'),
           _feature(CupertinoIcons.bolt_fill, 'Priority AI Rendering'),
-          _feature(CupertinoIcons.star_fill, 'Exclusive early-access plants'),
+          _feature(CupertinoIcons.star_fill, 'Exclusive early-access containers'),
 
           const SizedBox(height: 40),
 

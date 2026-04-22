@@ -1,5 +1,5 @@
 // lib/screens/onboarding/onboarding_screen.dart
-// Garden AI — Onboarding Screen (Enhanced Survey for User Retention)
+// Pantry AI — Onboarding Screen (Enhanced Survey for User Retention)
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,12 +23,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   final TextEditingController _nameCtl = TextEditingController();
   bool _isFinalizing = false;
 
-  // ── 7 Survey questions for garden personalization ──
+  // ── 7 Survey questions for pantry personalization ──
   final List<_Question> _questions = [
     _Question(
       keyName: 'q_type',
-      title: 'What\'s your garden type?',
-      subtitle: 'We\'ll tailor AI designs to fit your landscape.',
+      title: 'What\'s your pantry type?',
+      subtitle: 'We\'ll tailor AI designs to fit your pantry.',
       icon: Icons.eco_rounded,
       accentEmoji: '🌿',
       options: [
@@ -47,10 +47,10 @@ class _OnboardingScreenState extends State<OnboardingScreen>
       accentEmoji: '✨',
       options: [
         _Option('Modern Sanctuary', Icons.spa_rounded),
-        _Option('English Cottage', Icons.villa_rounded),
-        _Option('Zen Garden', Icons.self_improvement_rounded),
-        _Option('Productive Vegetable', Icons.agriculture_rounded),
-        _Option('Entertaining Space', Icons.groups_rounded),
+        _Option('Rustic Farmhouse', Icons.villa_rounded),
+        _Option('Zen Pantry', Icons.self_improvement_rounded),
+        _Option('Baking Supplies', Icons.agriculture_rounded),
+        _Option('Entertaining Bar', Icons.groups_rounded),
       ],
     ),
     _Question(
@@ -84,7 +84,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     _Question(
       keyName: 'q_timeline',
       title: 'Project timeline?',
-      subtitle: 'When would you like to start planting?',
+      subtitle: 'When would you like to start organizing?',
       icon: Icons.calendar_month_rounded,
       accentEmoji: '📅',
       options: [
@@ -111,15 +111,15 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     ),
     _Question(
       keyName: 'q_usage',
-      title: 'Main garden usage?',
+      title: 'Main pantry usage?',
       subtitle: 'Helps us design for your lifestyle.',
-      icon: Icons.beach_access_rounded,
+      icon: Icons.wine_bar_rounded,
       accentEmoji: '🍹',
       options: [
-        _Option('Relaxation', Icons.weekend_rounded),
+        _Option('Meal prepping', Icons.weekend_rounded),
         _Option('Family & Kids', Icons.child_care_rounded),
-        _Option('Social BBQ', Icons.outdoor_grill_rounded),
-        _Option('Urban farming', Icons.agriculture_rounded),
+        _Option('Family Snacks', Icons.fastfood_rounded),
+        _Option('Bulk shopping', Icons.agriculture_rounded),
         _Option('Visual decor', Icons.auto_awesome_rounded),
       ],
     ),
@@ -242,9 +242,9 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       Image.asset('assets/icon.png', width: 30, height: 30),
                       const SizedBox(width: 10),
                       const Text(
-                        'GARDEN AI',
+                        'PANTRY AI',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppTheme.mistWhite,
                           fontSize: 16,
                           fontWeight: FontWeight.w800,
                           letterSpacing: 2.0,
@@ -254,14 +254,14 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.06),
+                          color: AppTheme.mistWhite.withValues(alpha: 0.06),
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+                          border: Border.all(color: AppTheme.mistWhite.withValues(alpha: 0.08)),
                         ),
                         child: Text(
                           '${_page + 1} of $_totalPages',
                           style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.45),
+                            color: AppTheme.mistWhite.withValues(alpha: 0.45),
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                           ),
@@ -287,7 +287,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                   ? (isCurrent
                                         ? AppTheme.mossGreen.withValues(alpha: 0.7)
                                         : AppTheme.mossGreen)
-                                  : Colors.white.withValues(alpha: 0.07),
+                                  : AppTheme.mistWhite.withValues(alpha: 0.07),
                               borderRadius: BorderRadius.circular(2),
                             ),
                           ),
@@ -328,14 +328,14 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                             height: 48,
                             width: 48,
                             decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: 0.06),
+                              color: AppTheme.mistWhite.withValues(alpha: 0.06),
                               borderRadius: BorderRadius.circular(14),
-                              border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+                              border: Border.all(color: AppTheme.mistWhite.withValues(alpha: 0.08)),
                             ),
                             child: Icon(
                               CupertinoIcons.chevron_left,
                               size: 18,
-                              color: Colors.white.withValues(alpha: 0.5),
+                              color: AppTheme.mistWhite.withValues(alpha: 0.5),
                             ),
                           ),
                         ),
@@ -349,7 +349,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                             decoration: BoxDecoration(
                               color: canContinue
                                   ? AppTheme.mossGreen
-                                  : Colors.white.withValues(alpha: 0.07),
+                                  : AppTheme.mistWhite.withValues(alpha: 0.07),
                               borderRadius: BorderRadius.circular(15),
                               boxShadow: canContinue
                                   ? [
@@ -367,7 +367,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                 Text(
                                   _onLastQuestion ? '🚀  Get Started' : 'Continue',
                                   style: TextStyle(
-                                    color: canContinue ? Colors.black : Colors.white.withValues(alpha: 0.25),
+                                    color: canContinue ? AppTheme.deepSoil : AppTheme.mistWhite.withValues(alpha: 0.25),
                                     fontWeight: FontWeight.w700,
                                     fontSize: 15.5,
                                     letterSpacing: 0.3,
@@ -378,7 +378,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                   Icon(
                                     CupertinoIcons.arrow_right,
                                     size: 15,
-                                    color: canContinue ? Colors.black : Colors.white.withValues(alpha: 0.2),
+                                    color: canContinue ? AppTheme.deepSoil : AppTheme.mistWhite.withValues(alpha: 0.2),
                                   ),
                                 ],
                               ],
@@ -412,10 +412,10 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       ),
                       const SizedBox(height: 24),
                       const Text(
-                        'Building your\npersonalized garden...',
+                        'Building your\npersonalized pantry...',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppTheme.mistWhite,
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                           height: 1.4,
@@ -483,21 +483,21 @@ class _IntroPage extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(32),
               child: Image.asset(
-                'assets/images/AI Garden Transformation.jpeg',
+                'assets/images/AI Pantry Transformation.jpeg',
                 fit: BoxFit.cover,
               ),
             ),
           ),
           const SizedBox(height: 36),
           const Text(
-            'Redesign Your\nGarden with AI',
-            style: TextStyle(color: Colors.white, fontSize: 34, fontWeight: FontWeight.w800, height: 1.15, letterSpacing: -0.8),
+            'Redesign Your\nPantry with AI',
+            style: TextStyle(color: AppTheme.mistWhite, fontSize: 34, fontWeight: FontWeight.w800, height: 1.15, letterSpacing: -0.8),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 14),
           Text(
-            'Upload a photo and let AI instantly redesign your garden — from tropical jungle to zen sanctuary.',
-            style: TextStyle(color: Colors.white.withValues(alpha: 0.55), fontSize: 15.5, height: 1.55),
+            'Upload a photo and let AI instantly redesign your pantry — from tropical jungle to zen sanctuary.',
+            style: TextStyle(color: AppTheme.mistWhite.withValues(alpha: 0.55), fontSize: 15.5, height: 1.55),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 40),
@@ -531,7 +531,7 @@ class _IntroFeature extends StatelessWidget {
           child: Icon(icon, size: 17, color: AppTheme.mossGreen),
         ),
         const SizedBox(width: 14),
-        Text(text, style: TextStyle(color: Colors.white.withValues(alpha: 0.85), fontSize: 14.5, fontWeight: FontWeight.w500)),
+        Text(text, style: TextStyle(color: AppTheme.mistWhite.withValues(alpha: 0.85), fontSize: 14.5, fontWeight: FontWeight.w500)),
       ],
     );
   }
@@ -558,18 +558,18 @@ class _NamePage extends StatelessWidget {
             child: const Icon(CupertinoIcons.person, size: 34, color: AppTheme.mossGreen),
           ),
           const SizedBox(height: 28),
-          const Text('What\'s your name?', style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w800, letterSpacing: -0.5)),
+          const Text('What\'s your name?', style: TextStyle(color: AppTheme.mistWhite, fontSize: 28, fontWeight: FontWeight.w800, letterSpacing: -0.5)),
           const SizedBox(height: 8),
-          Text('We\'ll personalize every design recommendation for you.', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 15, height: 1.4), textAlign: TextAlign.center),
+          Text('We\'ll personalize every design recommendation for you.', style: TextStyle(color: AppTheme.mistWhite.withValues(alpha: 0.5), fontSize: 15, height: 1.4), textAlign: TextAlign.center),
           const SizedBox(height: 36),
           CupertinoTextField(
             controller: controller,
             placeholder: 'Enter your name',
-            placeholderStyle: TextStyle(color: Colors.white.withValues(alpha: 0.22)),
-            style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w500),
+            placeholderStyle: TextStyle(color: AppTheme.mistWhite.withValues(alpha: 0.22)),
+            style: const TextStyle(color: AppTheme.mistWhite, fontSize: 17, fontWeight: FontWeight.w500),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.05),
+              color: AppTheme.mistWhite.withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: AppTheme.mossGreen.withValues(alpha: 0.25), width: 1.5),
             ),
@@ -612,12 +612,12 @@ class _QuestionPage extends StatelessWidget {
             children: [
               Text(question.accentEmoji, style: const TextStyle(fontSize: 26)),
               const SizedBox(width: 12),
-              Expanded(child: Text(question.title, style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w800, height: 1.2))),
+              Expanded(child: Text(question.title, style: const TextStyle(color: AppTheme.mistWhite, fontSize: 24, fontWeight: FontWeight.w800, height: 1.2))),
             ],
           ),
           if (question.subtitle != null) ...[
             const SizedBox(height: 8),
-            Text(question.subtitle!, style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 15, height: 1.4)),
+            Text(question.subtitle!, style: TextStyle(color: AppTheme.mistWhite.withValues(alpha: 0.4), fontSize: 15, height: 1.4)),
           ],
           const SizedBox(height: 32),
           ...List.generate(question.options.length, (i) {
@@ -630,15 +630,15 @@ class _QuestionPage extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 12),
                 padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppTheme.mossGreen.withValues(alpha: 0.12) : Colors.white.withValues(alpha: 0.04),
+                  color: isSelected ? AppTheme.mossGreen.withValues(alpha: 0.12) : AppTheme.mistWhite.withValues(alpha: 0.04),
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: isSelected ? AppTheme.mossGreen.withValues(alpha: 0.5) : Colors.white.withValues(alpha: 0.08), width: isSelected ? 1.5 : 1),
+                  border: Border.all(color: isSelected ? AppTheme.mossGreen.withValues(alpha: 0.5) : AppTheme.mistWhite.withValues(alpha: 0.08), width: isSelected ? 1.5 : 1),
                 ),
                 child: Row(
                   children: [
-                    Icon(opt.icon, color: isSelected ? AppTheme.mossGreen : Colors.white.withValues(alpha: 0.35), size: 22),
+                    Icon(opt.icon, color: isSelected ? AppTheme.mossGreen : AppTheme.mistWhite.withValues(alpha: 0.35), size: 22),
                     const SizedBox(width: 14),
-                    Expanded(child: Text(opt.label, style: TextStyle(color: isSelected ? Colors.white : Colors.white.withValues(alpha: 0.7), fontSize: 15, fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500))),
+                    Expanded(child: Text(opt.label, style: TextStyle(color: isSelected ? AppTheme.mistWhite : AppTheme.mistWhite.withValues(alpha: 0.7), fontSize: 15, fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500))),
                     if (isSelected) const Icon(Icons.check_circle_rounded, color: AppTheme.mossGreen, size: 18),
                   ],
                 ),

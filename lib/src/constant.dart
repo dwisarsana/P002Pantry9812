@@ -1,4 +1,4 @@
-// RevenueCat + helper premium for Garden AI (iOS + Android ready)
+// RevenueCat + helper premium for Pantry AI (iOS + Android ready)
 
 import 'dart:async';
 import 'dart:io';
@@ -19,12 +19,12 @@ const amazonApiKey = 'amazon_api_key'; // Android (Amazon)
 const appleApiKey = 'appl_KEWWHMhhILmVXtUgAYxPqCiwpbB'; // iOS
 
 const appId =
-    'app.garden.ai'; // Garden AI identifier
+    'app.pantry.ai'; // Pantry AI identifier
 
-const entitlementKey = 'garden'; // Generic entitlement key
+const entitlementKey = 'pantry'; // Generic entitlement key
 const int kPremiumDailyLimit = 10;
 
-const tokenPack5Id = 'ai.garden.token5';
+const tokenPack5Id = 'ai.pantry.token5';
 const String kToken5ProductId = tokenPack5Id;
 
 const String kPrivacyPolicyUrl = 'https://appsbylily.com/privacy.html';
@@ -40,7 +40,7 @@ ValueListenable<int> get tokenBalanceListenable => _tokenBalance;
 StreamSubscription<int>? _tokenSubscription;
 
 // =================== TOTAL GENERATION COUNT ===================
-const String _kTotalGenerationKey = 'garden_ai_total_generations';
+const String _kTotalGenerationKey = 'pantry_ai_total_generations';
 
 Future<int> getTotalGenerationCount() async {
   final prefs = await SharedPreferences.getInstance();
@@ -54,7 +54,7 @@ Future<void> incrementTotalGenerationCount() async {
 }
 
 // =================== DEVELOPER MODE (Debug Only) ===================
-const String _kDevModeKey = 'garden_developer_mode_enabled';
+const String _kDevModeKey = 'pantry_developer_mode_enabled';
 bool _devModeEnabled = false;
 
 /// Check if developer mode is enabled (bypasses premium checks for testing)
@@ -123,7 +123,7 @@ Future<void> debugSetFreeUser() async {
 bool _paywallShowing = false;
 const _justPurchasedKey = 'just_purchased_ms';
 const _suppressMinutesAfterPurchase = 10;
-const _kPremiumDailyKeyPrefix = 'garden_ai_premium_daily_';
+const _kPremiumDailyKeyPrefix = 'pantry_ai_premium_daily_';
 
 // =================== INIT ===================
 Future<void> initRevenueCat() async {
@@ -199,11 +199,11 @@ Future<bool> presentPaywallGuarded(
   _paywallShowing = true;
 
   try {
-    debugPrint('🟢 Opening Garden AI paywall (forceLoading: $forceLoading)...');
+    debugPrint('🟢 Opening Pantry AI paywall (forceLoading: $forceLoading)...');
     await Navigator.of(context).push(
       MaterialPageRoute(
         fullscreenDialog: true,
-        builder: (_) => GardenAIPaywall(forceLoading: forceLoading),
+        builder: (_) => PantryAIPaywall(forceLoading: forceLoading),
       ),
     );
 

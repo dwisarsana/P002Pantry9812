@@ -73,10 +73,10 @@ flutter:
 
   assets:
     - assets/icon.png
-    - assets/images/AI Garden Transformation.jpeg
+    - assets/images/AI Pantry Transformation.jpeg
     - assets/images/Styles Library.jpeg
     - assets/images/The Nano Banana.jpeg
-    - assets/images/banana_hero.png
+    - assets/images/pantry_hero.png
     - assets/images/styles/
 
   # An image asset can refer to one or more resolution-specific "variants", see
